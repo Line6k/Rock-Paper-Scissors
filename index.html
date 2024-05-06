@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div>
+        <h1 id="playerNumber">
+            First Player
+        </h1>
+    </div>
+    <div class="hand">
+        <button class="button" id="rock">
+            Rock
+        </button>
+    </div>
+    <div class="hand">
+        <button class="button" id="paper">
+            Paper
+        </button>
+    </div>
+    <div class="hand">
+        <button class="button" id="scissors">
+            Scissors
+        </button>
+    </div>
+    <div class="hand">
+        <button class="button" id="reset">
+            reset
+        </button>
+    </div>
+    <div>
+        <p id="winner">
+
+        </p>
+    </div>
+
+    <script>
+        let first;
+        let wasClicked = 0;
+        let second;
+        document.getElementById("rock").addEventListener("click", function () { check("Rock", wasClicked) });
+        document.getElementById("paper").addEventListener("click", function () { check("Paper", wasClicked) });
+        document.getElementById("scissors").addEventListener("click", function () { check("Scissors", wasClicked) });
+        document.getElementById("reset").addEventListener("click", function () { reset() });
+        function reset() {
+            first = null;
+            second = null;
+            wasClicked = 0;
+            document.getElementById("winner").innerHTML = "You may play again";
+            document.getElementById("playerNumber").innerHTML = "First Player";
+        }
+        function check(text, pressed) {
+            console.log(pressed);
+            if (pressed === 0) {
+                first = text;
+                wasClicked += 1;
+                console.log("First Pressed");
+                document.getElementById("winner").innerHTML = "";
+                document.getElementById("playerNumber").innerHTML = "Second Player";
+            }
+            else if (pressed === 1) {
+                second = text;
+                wasClicked += 1;
+                console.log("second pressed");
+                document.getElementById("playerNumber").innerHTML = "YEAHHH BABYYYY!!!";
+                if (first == second) {
+                    document.getElementById("winner").innerHTML = "Tie";
+                }
+                else if ((first === "Rock" && second === "Scissors") ||
+                    (first === "Paper" && second === "Rock") ||
+                    (first === "Scissors" && second === "Paper")) {
+                    document.getElementById("winner").innerHTML = "Player 1 Won";
+                }
+                else {
+                    document.getElementById("winner").innerHTML = "Player 2 won";
+                }
+
+            }
+            else {
+                document.getElementById("winner").innerHTML = "Please reset";
+            }
+        }
+
+
+    </script>
+</body>
